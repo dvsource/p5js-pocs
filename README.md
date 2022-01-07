@@ -3,6 +3,6 @@
 ## TODO
 
 - [x] start project
-- [ ] basic dynamic grid
+- [x] basic dynamic grid
 - [ ] POC Projects
   - [ ] Maze Generator
