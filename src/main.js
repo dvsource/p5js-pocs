@@ -1,5 +1,5 @@
-const CANVAS_W = 600;
-const CANVAS_H = 800;
+const CANVAS_W = 480;
+const CANVAS_H = 920;
 
 const GRID_W = 40;
 const GRID_H = 40;
@@ -8,9 +8,10 @@ const ROWS = CANVAS_H / GRID_H;
 const COLS = CANVAS_W / GRID_W;
 
 let x, y;
+let lastDirection;
 
 function setup() {
-  frameRate(2);
+  // frameRate(2);
   createCanvas(CANVAS_W, CANVAS_H);
   x = 10;
   y = 10;

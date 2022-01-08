@@ -4,9 +4,9 @@ const drawBox = (x, y) => {
   rect(x * GRID_W, y * GRID_H, GRID_W, GRID_H);
 
   // DEBUG:
-  // textSize(16);
-  // fill(202, 0, 0);
-  // text(`x: ${x}, y: ${y}`, x * GRID_W, y * GRID_H);
+  textSize(16);
+  fill(202, 0, 0);
+  text(`x: ${x}, y: ${y}`, x * GRID_W, y * GRID_H);
 };
 
 const go = () => {
@@ -21,7 +21,11 @@ const getRandomDirection = () => {
 };
 
 const getNextPos = (x, y) => {
-  const direction = getRandomDirection();
+  let direction = getRandomDirection();
+  while (!canGo(x, y, direction) && direction === lastDirection) {
+    direction = getRandomDirection();
+  }
+  lastDirection = direction;
   switch (direction) {
     case 1:
       return [x, goUp(y)];
@@ -32,6 +36,39 @@ const getNextPos = (x, y) => {
     case 4:
       return [goLeft(x), y];
   }
+};
+
+const canGo = (x, y, direction) => {
+  if (x === 0 && y === 0 && (direction === 1 || direction === 4)) {
+    return false;
+  } else if (
+    x === 0 &&
+    y === ROWS - 1 &&
+    (direction === 3 || direction === 4)
+  ) {
+    return false;
+  } else if (
+    x === COLS - 1 &&
+    y === 0 &&
+    (direction === 1 || direction === 2)
+  ) {
+    return false;
+  } else if (
+    x === COLS - 1 &&
+    y === ROWS - 1 &&
+    (direction === 2 || direction === 3)
+  ) {
+    return false;
+  } else if (x === 0 && direction === 4) {
+    return false;
+  } else if (x === COLS - 1 && direction === 2) {
+    return false;
+  } else if (y === 0 && direction === 1) {
+    return false;
+  } else if (y === ROWS - 1 && direction === 3) {
+    return false;
+  }
+  return true;
 };
 
 const goRight = (x) => {
